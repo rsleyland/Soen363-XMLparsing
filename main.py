@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as Xet
 import csv
 
+# These filenames should be in root directory
 FILES = [
     'Badges.xml',
     'Comments.xml', 
@@ -12,6 +13,7 @@ FILES = [
     'Votes.xml'
 ]
 
+# This is the maximum set of keys, some rows do not contain all fields but still need csv order to be consistent. Getting a non-existent key from a row will result in a empty field in csv ',,' maintains order of values
 KEYS = [
     ['Class', 'Date', 'Id', 'Name', 'TagBased', 'UserId'],
     ['ContentLicense', 'CreationDate', 'Id', 'PostId', 'Score', 'Text', 'UserDisplayName', 'UserId'],
