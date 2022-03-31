@@ -25,7 +25,12 @@ KEYS = [
     ['BountyAmount', 'CreationDate', 'Id', 'PostId', 'UserId', 'VoteTypeId']
 ]
 
+# Nested quotation marks are not accepted in neo4j so using built in repr function to wrap string in triple quotation marks
+def cleanText(text):
+    return repr(text)
+
 for i, file in enumerate(FILES):
+    print("File ", i)
     xmlparse = Xet.parse(file)
     name = file.split('.')[0]
     csvfile = open(f"csv/{name}.csv",'w',encoding='utf-8')
@@ -33,8 +38,15 @@ for i, file in enumerate(FILES):
     for row in xmlparse.findall("row"):
         csv_line = []
         for key in KEYS[i]:
-            csv_line.append(row.get(key))
+            field = ''
+            if key == 'Text':
+                field = cleanText(row.get(key))
+            else: field = row.get(key)
+            csv_line.append(field)
         csvfile_writer.writerow(csv_line)
     csvfile.close()
+
+
+
 
   
