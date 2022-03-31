@@ -39,7 +39,8 @@ for i, file in enumerate(FILES):
         csv_line = []
         for key in KEYS[i]:
             field = ''
-            if key == 'Text':
+            if key == 'Text' or key == 'Body' or key == 'Title' or key == 'AboutMe': 
+                ## parsing errors were occuring on these keys, so wrapped in triple quotes
                 field = cleanText(row.get(key))
             else: field = row.get(key)
             csv_line.append(field)
